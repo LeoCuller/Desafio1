@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Desafio1\\Desafio1\\Desafio1\\backend\\ProductApi\\ProductApi.csproj": {}
+    "C:\\Desafio1\\Desafio1\\backend\\productapi\\ProductApi.csproj": {}
   },
   "projects": {
-    "C:\\Desafio1\\Desafio1\\Desafio1\\backend\\ProductApi\\ProductApi.csproj": {
+    "C:\\Desafio1\\Desafio1\\backend\\productapi\\ProductApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Desafio1\\Desafio1\\Desafio1\\backend\\ProductApi\\ProductApi.csproj",
+        "projectUniqueName": "C:\\Desafio1\\Desafio1\\backend\\productapi\\ProductApi.csproj",
         "projectName": "ProductApi",
-        "projectPath": "C:\\Desafio1\\Desafio1\\Desafio1\\backend\\ProductApi\\ProductApi.csproj",
+        "projectPath": "C:\\Desafio1\\Desafio1\\backend\\productapi\\ProductApi.csproj",
         "packagesPath": "C:\\Users\\leocu\\.nuget\\packages\\",
-        "outputPath": "C:\\Desafio1\\Desafio1\\Desafio1\\backend\\ProductApi\\obj\\",
+        "outputPath": "C:\\Desafio1\\Desafio1\\backend\\productapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\leocu\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -503,11 +503,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desafio1\\desafio1\\desafio1\\backend\\productapi\\ProductApi.csproj",
+      "projectUniqueName": "C:\\Desafio1\\Desafio1\\backend\\ProductApi\\ProductApi.csproj",
       "projectName": "ProductApi",
-      "projectPath": "C:\\Desafio1\\desafio1\\desafio1\\backend\\productapi\\ProductApi.csproj",
+      "projectPath": "C:\\Desafio1\\Desafio1\\backend\\ProductApi\\ProductApi.csproj",
       "packagesPath": "C:\\Users\\leocu\\.nuget\\packages\\",
-      "outputPath": "C:\\Desafio1\\desafio1\\desafio1\\backend\\productapi\\obj\\",
+      "outputPath": "C:\\Desafio1\\Desafio1\\backend\\ProductApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\leocu\\AppData\\Roaming\\NuGet\\NuGet.Config"
