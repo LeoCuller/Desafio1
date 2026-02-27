@@ -38,3 +38,9 @@ Thumbs.db
 # =========================
 .env
 .env.*
+
+# Vite cache
+**/.vite/
+
+# npm debug
+npm-debug.log*

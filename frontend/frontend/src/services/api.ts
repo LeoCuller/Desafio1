@@ -31,3 +31,15 @@ export async function createProduct(product: Omit<Product, "id">): Promise<Produ
   return res.json();
 }
 
+export async function updateProduct(
+  id: string,
+  product: Omit<Product, "id">
+): Promise<void> {
+  const res = await fetch(`${API_BASE}/Products/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product),
+  });
+
+  if (!res.ok) throw new Error(`Erro ao atualizar produto: ${res.status}`);
+}
