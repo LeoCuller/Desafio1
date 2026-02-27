@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using ProductApi.Data;
 using ProductApi.Models;
 
 namespace ProductApi.Controllers;
@@ -7,21 +9,51 @@ namespace ProductApi.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    private static readonly List<Product> Products = new();
+    private readonly IMongoCollection<Product> _products;
 
-    // GET: /api/products
-    [HttpGet]
-    public ActionResult<List<Product>> GetAll()
+    public ProductsController(MongoContext context)
     {
-        return Ok(Products);
+        _products = context.Products;
     }
 
-    // POST: /api/products
-    [HttpPost]
-    public ActionResult<Product> Create([FromBody] Product product)
+    [HttpGet]
+    public async Task<ActionResult<List<Product>>> GetAll()
     {
-        product.Id = Products.Count + 1;
-        Products.Add(product);
+        var list = await _products.Find(_ => true).ToListAsync();
+        return Ok(list);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Product>> GetById(string id)
+    {
+        var product = await _products.Find(p => p.Id == id).FirstOrDefaultAsync();
+        if (product is null) return NotFound();
         return Ok(product);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Product>> Create(Product product)
+    {   
+        product.Id = null;
+        await _products.InsertOneAsync(product);
+        return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(string id, Product updated)
+    {
+        updated.Id = id;
+        var result = await _products.ReplaceOneAsync(p => p.Id == id, updated);
+
+        if (result.MatchedCount == 0) return NotFound();
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var result = await _products.DeleteOneAsync(p => p.Id == id);
+        if (result.DeletedCount == 0) return NotFound();
+        return NoContent();
     }
 }

@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { getProducts, deleteProduct } from "./services/api";
+import type { Product } from "./services/api";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // função para carregar produtos
+  async function load() {
+    try {
+      setLoading(true);
+      const data = await getProducts();
+      setProducts(data);
+    } catch (e: any) {
+      setError(e?.message ?? "Erro desconhecido");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div style={{ padding: 24 }}>
+      <h1>Produtos</h1>
 
-export default App
+      {loading && <p>Carregando...</p>}
+      {error && <p style={{ color: "red" }}>Erro: {error}</p>}
+
+      {!loading && !error && (
+        <ul>
+          {products.map((p) => (
+            <li
+              key={p.id}
+              style={{ display: "flex", gap: 10, alignItems: "center" }}
+            >
+              <span style={{ flex: 1 }}>
+                <strong>{p.name}</strong> — R$ {p.price} (Estoque: {p.stock})
+              </span>
+
+              <button
+                onClick={async () => {
+                  if (!p.id) return;
+                  await deleteProduct(p.id);
+                  await load(); // recarrega a lista
+                }}
+              >
+                Excluir
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}

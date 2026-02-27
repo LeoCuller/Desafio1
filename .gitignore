@@ -1,18 +1,40 @@
+# =========================
 # .NET
-bin/
-obj/
+# =========================
+**/bin/
+**/obj/
+*.dll
+*.exe
+*.pdb
 
-# Visual Studio
+# Visual Studio / VS Code
 .vs/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
 
-# Node
+# =========================
+# Node / Frontend
+# =========================
 node_modules/
+dist/
+build/
+coverage/
 
+# =========================
 # Logs
+# =========================
 *.log
 
+# =========================
 # OS
+# =========================
 .DS_Store
 Thumbs.db
+
+# =========================
+# Environment
+# =========================
+.env
+.env.*
